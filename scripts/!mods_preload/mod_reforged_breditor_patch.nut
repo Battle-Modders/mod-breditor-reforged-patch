@@ -1,5 +1,5 @@
 ::ModBreditorReforgedPatch <- {
-	Version = "1.0.0",
+	Version = "1.0.1",
 	ID = "mod_breditor_reforged_patch",
 	Name = "Breditor Reforged Patch",
 };
