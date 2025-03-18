@@ -969,16 +969,14 @@
 			return ret;
 		}
 
-		local perkttreeeeee =
-		{
-			General = toUIData("pgc.rf_always"),
-			Armor = toUIData("pgc.rf_armor"),
-			Exclusive = toUIData("pgc.rf_exclusive_1"),
-			FightingStyle = toUIData("pgc.rf_fighting_style"),
-			Shared = toUIData("pgc.rf_shared_1"),
-			Weapon = toUIData("pgc.rf_weapon"),
+		local perkttreeeeee = {
 			Special = []
 		};
+
+		foreach (category in ::DynamicPerks.PerkGroupCategories.getOrdered())
+		{
+			perkttreeeeee[category.getName()] <- toUIData(category.getID());
+		}
 
 		foreach (perkGroup in ::DynamicPerks.PerkGroups.getByType(::DynamicPerks.Class.SpecialPerkGroup))
 		{
