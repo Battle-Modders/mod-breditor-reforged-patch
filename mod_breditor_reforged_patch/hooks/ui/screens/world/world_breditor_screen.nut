@@ -1312,4 +1312,30 @@
 
 		return namedstuff;
 	}
+
+	q.OnGiveXP = @() function( _result )
+	{
+		local result = null;
+
+		local brothers = this.World.getPlayerRoster().getAll();
+		foreach( b in brothers )
+		{
+			if (b.getID() == _result.BroId)
+			{
+				local nextlevelXP = b.getXPForNextLevel() - b.m.XP;
+				b.addXP(nextlevelXP, false);
+				b.updateLevel();
+				b.getSkills().update();
+				result =
+				{
+					Level = b.getLevel(),
+					LevelUps = b.m.LevelUps,
+					PerkPoints = b.getPerkPoints(),
+					DailyWage = b.getDailyCost(),
+				};
+				break;
+			}
+		};
+		return result;
+	}
 });
