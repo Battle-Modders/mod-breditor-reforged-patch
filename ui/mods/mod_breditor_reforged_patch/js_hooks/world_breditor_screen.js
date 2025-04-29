@@ -236,3 +236,27 @@ WorldBreditorScreen.prototype.attachPerkEventHandler = function(_perk)
 	});
 };
 
+WorldBreditorScreen.prototype.giveXP = function ()
+{
+	var data = this.mData;
+	var self = this;
+	var result = {
+		BroId: this.mData.ID,
+	}
+	this.notifyBackendOnGiveXP(result, function(_result)
+        {
+            data.XpValue = _result.XpValue;
+			data.Level = _result.Level;
+            data.LevelUps = _result.LevelUps;
+            data.PerkPoints = _result.PerkPoints;
+			data.DailyWage = _result.DailyWage;
+			var parsedText = XBBCODE.process({
+				text: data['Name']+" (Lvl: "+data['Level']+" ("+data.LevelUps+"[img]gfx/ui/icons/leveled_up_bred.png[/img]), XP: "+data['XpValue']+")",
+				removeMisalignedTags: false,
+				addInLineBreaks: false
+			});
+			self.mDetailsPanel.CharacterName.html(parsedText.html);
+			self.mStatsOptions.PerkPoints.SVal.setInputTextBP(data.PerkPoints+'');
+			self.mStatsOptions.DailyWage.SVal.setInputTextBP(data.DailyWage+'');
+        });
+};

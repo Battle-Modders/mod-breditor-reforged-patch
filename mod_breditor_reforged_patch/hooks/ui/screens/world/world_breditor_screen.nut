@@ -1328,6 +1328,7 @@
 				b.getSkills().update();
 				result =
 				{
+					XpValue = b.m.XP,
 					Level = b.getLevel(),
 					LevelUps = b.m.LevelUps,
 					PerkPoints = b.getPerkPoints(),
